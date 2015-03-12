@@ -25,6 +25,7 @@ public class App {
         public Set<Class<?>> getClasses() {
             Set<Class<?>> classes = new HashSet<Class<?>>();
             classes.add(NotesResource.class);
+            classes.add(HelloResourceImpl.class);
             return classes;
         }
     }
