@@ -15,8 +15,17 @@ public class App {
     public static void main(String[] args) {
         UndertowJaxrsServer server = new UndertowJaxrsServer();
         server.deploy(RestApp.class);
-        final Undertow.Builder builder = Undertow.builder().addHttpListener(8080, "localhost");
+        final Undertow.Builder builder = Undertow.builder().addHttpListener(getPort(), "0.0.0.0");
         server.start(builder);
+    }
+
+    private static int getPort() {
+        try {
+            String port = System.getenv("PORT");
+            return port == null ? 8080 : Integer.parseInt(port);
+        } catch (NumberFormatException err) {
+            return 8080;
+        }
     }
 
     @ApplicationPath("/api")
@@ -26,6 +35,7 @@ public class App {
             Set<Class<?>> classes = new HashSet<Class<?>>();
             classes.add(NotesResource.class);
             classes.add(HelloResourceImpl.class);
+            classes.add(EnvironmentResource.class);
             return classes;
         }
     }
