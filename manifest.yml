@@ -1,0 +1,8 @@
+---
+applications:
+- name: resteasy-bootstrap
+  memory: 256M
+  instances: 2
+  path: target/resteasy-bootstrap-jar-with-dependencies.jar
+  env:
+    JAVA_OPTS: "-Dsettings.sample=false"
